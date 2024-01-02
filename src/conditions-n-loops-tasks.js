@@ -42,7 +42,21 @@ function isPositive(number) {
  *  -0.1, 0, 0.2  => 0.2
  */
 function getMaxNumber(a, b, c) {
-  return Math.max(a, b, c);
+  let num;
+  if (a > c && a > b) {
+    num = a;
+  }
+  if (b > c && b > a) {
+    num = b;
+  }
+  if (c > b && c > a) {
+    num = c;
+  }
+  if (a === b && a === c && b === c) {
+    num = a;
+  }
+
+  return num;
 }
 
 /**
@@ -63,8 +77,14 @@ function getMaxNumber(a, b, c) {
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  */
-function canQueenCaptureKing(/* queen, king */) {
-  throw new Error('Not implemented');
+function canQueenCaptureKing(queen, king) {
+  if (queen.x === king.x || queen.y === king.y) {
+    return true;
+  }
+  if (Math.abs(queen.x - king.x) === Math.abs(queen.y - king.y)) {
+    return true;
+  }
+  return false;
 }
 
 /**
@@ -203,8 +223,11 @@ function convertNumberToString(numberStr) {
         break;
     }
   }
-
-  return resStr.trim();
+  let result = '';
+  for (let i = 0; i < resStr.length - 1; i += 1) {
+    result += resStr[i];
+  }
+  return result;
 }
 
 /**
@@ -295,6 +318,7 @@ function isContainNumber(num, digit) {
 function getBalanceIndex(arr) {
   let sum1 = 0;
   let sum2 = 0;
+
   for (let i = 0; i < arr.length; i += 1) {
     sum1 += arr[i];
   }
