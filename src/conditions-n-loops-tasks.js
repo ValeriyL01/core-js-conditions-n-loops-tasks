@@ -353,8 +353,43 @@ function getBalanceIndex(arr) {
  *          [10, 9,  8,  7]
  *        ]
  */
-function getSpiralMatrix(/* size */) {
-  throw new Error('Not implemented');
+function getSpiralMatrix(size) {
+  let row = 0;
+  let column = 0;
+  let rowEnd = size - 1;
+  let columnEnd = size - 1;
+
+  let number = 0;
+  const matrix = [];
+  for (let i = 0; i < size; i += 1) {
+    matrix[i] = [];
+  }
+  for (let j = 0; j < size; j += 1) {
+    for (let i = column; i <= columnEnd; i += 1) {
+      number += 1;
+      matrix[row][i] = number;
+    }
+    row += 1;
+
+    for (let i = row; i <= rowEnd; i += 1) {
+      number += 1;
+      matrix[i][columnEnd] = number;
+    }
+    columnEnd -= 1;
+
+    for (let i = columnEnd; i >= column; i -= 1) {
+      number += 1;
+      matrix[rowEnd][i] = number;
+    }
+    rowEnd -= 1;
+
+    for (let i = rowEnd; i >= row; i -= 1) {
+      number += 1;
+      matrix[i][column] = number;
+    }
+    column += 1;
+  }
+  return matrix;
 }
 
 /**
@@ -443,7 +478,9 @@ function sortByAsc(arr) {
  */
 function shuffleChar(str, iterations) {
   let resStr = str;
-
+  if (iterations === 0) {
+    return str;
+  }
   for (let i = 0; i < iterations; i += 1) {
     let odd = '';
     let even = '';
